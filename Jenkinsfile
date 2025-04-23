@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18-alpine'
+            args '-u root'  // เพื่อให้ run npm ได้
+        }
+    }
 
     environment {
         OPENSHIFT_SERVER = 'https://api.crc.testing:6443'     // แก้ให้ตรงกับ cluster ของคุณ
