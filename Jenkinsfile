@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        OPENSHIFT_SERVER = 'https://api.crc.testing:6443'     // แก้ให้ตรงกับ cluster ของคุณ
+        OPENSHIFT_SERVER = 'https://host.docker.internal:6443'     // แก้ให้ตรงกับ cluster ของคุณ
         OPENSHIFT_TOKEN = credentials('OPENSHIFT_TOKEN')       // ใส่ token ผ่าน Jenkins Credentials
         OPENSHIFT_NAMESPACE = 'myproject'                      // namespace ที่ต้องการ deploy
     }
