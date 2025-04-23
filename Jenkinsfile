@@ -8,13 +8,13 @@ pipeline {
     }
 
     stages {
-        stage('Clone Local Repo') {
+        stage('Clone Repo') {
             steps {
-                dir('hello-openshift') {
-                    git url: 'https://github.com/alnico1/hello-openshift.git'
-                }
+                git url: 'https://github.com/your-user/your-repo.git',
+                    credentialsId: 'github'
             }
         }
+
 
         stage('Build App') {
             steps {
