@@ -7,22 +7,19 @@ pipeline {
         OPENSHIFT_NAMESPACE = 'myproject'                      // namespace ที่ต้องการ deploy
     }
 
-    stages {
-        stage('Clone Repo') {
-            steps {
-                git branch: 'main', url: 'https://github.com/alnico1/hello-openshift.git',
-                    credentialsId: 'github'
+        stages {
+            stage('Clone Repo') {
+                steps {
+                    git branch: 'main', url: 'https://github.com/alnico1/hello-openshift.git',
+                        credentialsId: 'github'
+                }
             }
-        }
 
 
         stage('Build App') {
             steps {
-            script {
-                    sh '''
-                       docker run --rm -v $(pwd)/hello-openshift:/app -w /app node:18 bash -c "npm install && npm run build"
-                       '''
-                }
+                    sh 'npm install'
+                    sh 'npm run build'
             }
         }
 
