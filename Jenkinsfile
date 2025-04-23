@@ -1,9 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18-alpine'
-            args '-u root'  // เพื่อให้ run npm ได้
-        }
+    agent any
+
+    tools {
+        nodejs 'NodeJS'   // ชื่อต้องตรงกับที่ตั้งไว้ใน Jenkins
     }
 
     environment {
