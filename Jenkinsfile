@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/alnico1/hello-openshift.git',
+                git branch: 'main', url: 'https://github.com/alnico1/hello-openshift.git',
                     credentialsId: 'github'
             }
         }
