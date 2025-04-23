@@ -55,14 +55,13 @@ pipeline {
         
                 oc expose svc/my-node-app || echo "Service not ready yet"
               '''
-          }
+              }
+            }
         }
-
     post {
         always {
             echo 'Cleaning up...'
             }
         }
     }
-}
 
