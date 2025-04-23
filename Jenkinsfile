@@ -18,8 +18,11 @@ pipeline {
 
         stage('Build App') {
             steps {
-                    sh 'npm install'
-                    sh 'npm run build'
+            script {
+                    sh '''
+                       docker run --rm -v $(pwd)/hello-openshift:/app -w /app node:18 bash -c "npm install && npm run build"
+                       '''
+                }
             }
         }
 
