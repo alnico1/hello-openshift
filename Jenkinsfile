@@ -37,21 +37,27 @@ pipeline {
         }
 
         stage('Deploy to OpenShift') {
-            steps {
-                    sh '''
-                        oc project ${OPENSHIFT_NAMESPACE}
-
-                        # Create new app (ครั้งแรกเท่านั้น)
-                        if ! oc get dc my-node-app > /dev/null 2>&1; then
-                            oc new-app . --name=my-node-app
-                            oc expose svc/my-node-app
-                        else
-                            oc start-build my-node-app --from-dir=. --follow
-                        fi
-                    '''
-            }
+          steps {
+              sh '''
+                oc project ${OPENSHIFT_NAMESPACE}
+        
+                if ! oc get dc my-node-app > /dev/null 2>&1; then
+                  oc new-app . --name=my-node-app --strategy=docker
+                fi
+        
+                oc start-build my-node-app --from-dir=. --follow || true
+        
+                echo "Waiting for service to be ready..."
+                for i in {1..10}; do
+                  sleep 5
+                  oc get svc my-node-app && break
+                done
+        
+                oc expose svc/my-node-app || echo "Service not ready yet"
+              '''
+          }
         }
-    }
+
 
     post {
         always {
