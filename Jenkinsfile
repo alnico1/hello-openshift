@@ -18,10 +18,8 @@ pipeline {
 
         stage('Build App') {
             steps {
-                dir('hello-openshift') {
                     sh 'npm install'
                     sh 'npm run build'
-                }
             }
         }
 
