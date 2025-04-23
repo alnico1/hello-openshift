@@ -11,7 +11,7 @@ pipeline {
         stage('Clone Local Repo') {
             steps {
                 dir('hello-openshift') {
-                    git url: 'file:///home/sytk/devlab/hello-openshift'
+                    git url: 'https://github.com/alnico1/hello-openshift.git'
                 }
             }
         }
