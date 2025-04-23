@@ -38,7 +38,6 @@ pipeline {
 
         stage('Deploy to OpenShift') {
             steps {
-                dir('hello-openshift') {
                     sh '''
                         oc project ${OPENSHIFT_NAMESPACE}
 
@@ -50,7 +49,6 @@ pipeline {
                             oc start-build my-node-app --from-dir=. --follow
                         fi
                     '''
-                }
             }
         }
     }
