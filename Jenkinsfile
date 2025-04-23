@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh '''
                     oc logout 2>/dev/null || true
-                    oc login ${OPENSHIFT_SERVER} --token=${OPENSHIFT_TOKEN} --insecure-skip-tls-verify
+                    oc login ${OPENSHIFT_SERVER} --token=${OPENSHIFT_TOKEN} --insecure-skip-tls-verify=true
                 '''
             }
         }
